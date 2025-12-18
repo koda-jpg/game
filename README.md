@@ -1,44 +1,39 @@
-# ローカルオセロゲーム
+# Games（ローカル／デモ）
 
-この小さなプロジェクトは、HTML/CSS/JavaScriptで動作するローカルのオセロです。ブラウザで`index.html`を開くだけで遊べます。
+このリポジトリは複数の小さなブラウザゲームをまとめて管理するための monorepo です。
+各ゲームは `games/` フォルダ配下に置かれます。
 
-使い方:
-
-1. このフォルダで簡易HTTPサーバーを起動（推奨）:
+ローカルで動かす（推奨）:
 
 ```zsh
 cd /Users/kodamasaya/Desktop/個人用/趣味用/趣味制作/game
 python3 -m http.server 8000
 ```
 
-ブラウザで `http://localhost:8000/` を開いてください。
+ブラウザで `http://localhost:8000/` にアクセスし、ランディングページから各ゲームに移動してください。
 
-または `index.html` を直接開いても動作します（ローカルファイル制限に依存しません）。
-
-もしリポジトリ内で他のゲームと一緒に管理する場合、オセロ本体のファイルは `OthelloGame/` フォルダに移動しました。
-ローカルでこのゲームだけを起動するには:
+個別ゲームを直接起動する場合:
 
 ```zsh
-cd /Users/kodamasaya/Desktop/個人用/趣味用/趣味制作/game/OthelloGame
+cd /Users/kodamasaya/Desktop/個人用/趣味用/趣味制作/game/games/OthelloGame
 python3 -m http.server 8000
 ```
 
-ブラウザで `http://localhost:8000/` を開いてください。
+機能（現在）:
+- `games/OthelloGame/` : 8x8 のオセロゲーム（ローカルプレイ、簡易AI）
 
-機能:
-- 8x8 のオセロ盤
-- 合法手の候補表示（トグル可能）
-- スコア表示
-- パス、勝敗判定
-- 再開始ボタン
+デプロイ:
+- このリポジトリは GitHub Actions による自動デプロイを設定しています。
+	`main` ブランチに push すると、静的ファイルが `gh-pages` ブランチにデプロイされ、
+	サイトは `https://koda-jpg.github.io/game/` で公開されます。
 
 次の改善案:
-- AI 対戦
-- パス回数や履歴の表示
-- モバイル向け操作改善
+- AI の強化（難易度設定）
+- モバイル操作の改善
+- ランディングページの自動生成
 
 ライブデモ:
 
-- https://koda-jpg.github.io/game/  
+- https://koda-jpg.github.io/game/
 
-公開されたデモURLを README に追加しました。
+（注）各ゲーム内のアセットは相対パスで参照してください。Actions は `index.html` と `games/` を `public/` にコピーして `gh-pages` に公開します。

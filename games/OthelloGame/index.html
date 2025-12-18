@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>オセロ（ローカル）</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>オセロ</h1>
+      <div class="status">
+        <div id="turn">ターン: <span id="turnPlayer">黒</span></div>
+        <div id="score">黒: <span id="scoreBlack">2</span> / 白: <span id="scoreWhite">2</span></div>
+      </div>
+    </header>
+
+    <main>
+      <div id="board" class="board"></div>
+      <div class="controls">
+        <button id="restartBtn">再開始</button>
+        <div id="message" class="message"></div>
+      </div>
+    </main>
+  </div>
+
+  <script src="main.js" defer></script>
+</body>
+</html>

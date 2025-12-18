@@ -1,0 +1,24 @@
+name: Deploy site to GitHub Pages
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Prepare public folder
+        run: |
+          rm -rf public
+          mkdir public
+          if [ -f index.html ]; then cp index.html public/; fi
+          if [ -d games ]; then cp -R games public/games; fi
+
+      - name: Deploy to gh-pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./public
+          publish_branch: gh-pages
