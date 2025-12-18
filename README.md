@@ -26,3 +26,9 @@ python3 -m http.server 8000
 - AI 対戦
 - パス回数や履歴の表示
 - モバイル向け操作改善
+
+ライブデモ:
+
+- https://koda-jpg.github.io/game/  
+
+公開されたデモURLを README に追加しました。
