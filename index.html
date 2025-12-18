@@ -3,28 +3,22 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>オセロ（ローカル）</title>
-  <link rel="stylesheet" href="style.css" />
+  <title>Games - koda-jpg</title>
+  <style>
+    body{font-family:system-ui, -apple-system, "Hiragino Kaku Gothic ProN", "Noto Sans JP", Arial; padding:24px;}
+    .games{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;max-width:900px}
+    .card{padding:12px;border:1px solid #ddd;border-radius:8px;background:#fff}
+    a{color:#0366d6;text-decoration:none}
+  </style>
 </head>
 <body>
-  <div class="container">
-    <header>
-      <h1>オセロ</h1>
-      <div class="status">
-        <div id="turn">ターン: <span id="turnPlayer">黒</span></div>
-        <div id="score">黒: <span id="scoreBlack">2</span> / 白: <span id="scoreWhite">2</span></div>
-      </div>
-    </header>
-
-    <main>
-      <div id="board" class="board"></div>
-      <div class="controls">
-        <button id="restartBtn">再開始</button>
-        <div id="message" class="message"></div>
-      </div>
-    </main>
+  <h1>My Games</h1>
+  <p>ここから各ゲームに移動してください。</p>
+  <div class="games">
+    <div class="card">
+      <h2><a href="./games/OthelloGame/">Othello</a></h2>
+      <p>ローカルで作ったオセロ（クリックして遊ぶ）。</p>
+    </div>
   </div>
-
-  <script src="main.js" defer></script>
 </body>
 </html>
