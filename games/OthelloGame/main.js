@@ -4,6 +4,7 @@ let currentPlayer = BLACK;
 // Single-player 設定: true にすると人間 vs AI (人間は `humanPlayer`)
 let singlePlayer = true;
 let humanPlayer = BLACK;
+let aiTimer = null;
 
 const boardEl = document.getElementById('board');
 const turnEl = document.getElementById('turnPlayer');
@@ -11,6 +12,8 @@ const scoreBlackEl = document.getElementById('scoreBlack');
 const scoreWhiteEl = document.getElementById('scoreWhite');
 const messageEl = document.getElementById('message');
 const restartBtn = document.getElementById('restartBtn');
+const modeAIEl = document.getElementById('modeAI');
+const modeHumanEl = document.getElementById('modeHuman');
 
 
 function initBoard(){
@@ -143,10 +146,33 @@ function aiMove(){
     return;
   }
   messageEl.textContent = (currentPlayer===BLACK? '黒':'白') + '（AI）が考えています...';
-  setTimeout(()=>{
+  // clear previous timer if any
+  if(aiTimer) { clearTimeout(aiTimer); aiTimer = null; }
+  aiTimer = setTimeout(()=>{
+    // if mode changed to human while waiting, abort
+    if(!singlePlayer) { aiTimer = null; messageEl.textContent = ''; return; }
     applyMove(move.x, move.y, currentPlayer);
+    aiTimer = null;
     nextTurn();
   }, 500);
+}
+
+function setMode(mode){
+  const wasSingle = singlePlayer;
+  singlePlayer = (mode === 'ai');
+  if(!singlePlayer){
+    // switching to human: cancel pending AI timer and clear status
+    if(aiTimer){ clearTimeout(aiTimer); aiTimer = null; }
+    messageEl.textContent = '';
+  } else {
+    // switched to AI: if it's AI's turn, trigger AI move
+    if(currentPlayer !== humanPlayer){
+      // small delay to allow UI update
+      setTimeout(()=>{ if(singlePlayer) aiMove(); }, 50);
+    }
+  }
+  // re-render to update hints visibility
+  renderBoard();
 }
 
 function nextTurn(){
@@ -191,6 +217,10 @@ function countScores(){
 
 
 restartBtn.addEventListener('click', ()=>{initBoard(); messageEl.textContent=''; renderBoard();});
+
+// mode handlers
+if(modeAIEl) modeAIEl.addEventListener('change', ()=>{ if(modeAIEl.checked) setMode('ai'); });
+if(modeHumanEl) modeHumanEl.addEventListener('change', ()=>{ if(modeHumanEl.checked) setMode('human'); });
 
 // init
 initBoard(); renderBoard();
