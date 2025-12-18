@@ -15,6 +15,16 @@ python3 -m http.server 8000
 
 または `index.html` を直接開いても動作します（ローカルファイル制限に依存しません）。
 
+もしリポジトリ内で他のゲームと一緒に管理する場合、オセロ本体のファイルは `OthelloGame/` フォルダに移動しました。
+ローカルでこのゲームだけを起動するには:
+
+```zsh
+cd /Users/kodamasaya/Desktop/個人用/趣味用/趣味制作/game/OthelloGame
+python3 -m http.server 8000
+```
+
+ブラウザで `http://localhost:8000/` を開いてください。
+
 機能:
 - 8x8 のオセロ盤
 - 合法手の候補表示（トグル可能）
